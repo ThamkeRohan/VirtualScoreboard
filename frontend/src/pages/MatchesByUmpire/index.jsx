@@ -24,8 +24,8 @@ export default function MatchesByUmpire() {
   return (
     <div className="matches-by-umpire">
       <div className="container">
-        <h1 className="page-heading text-xl-bold">Matches created by you</h1>
-        <div className="matches">
+        <h1 className="page-heading text-xl-bold">Matches created by me</h1>
+        <div className="match-list">
           {matches.map((match) => (
             <MatchCard key={match._id} match={match} />
           ))}

@@ -10,6 +10,7 @@ import UmpireScoreboard from "../../pages/UmpireScoreboard";
 import SpectatorScoreboard from "../../pages/SpectatorScoreboard";
 import { useAuth } from ".././../contexts/AuthContext";
 import Home from "../../pages/Home";
+import Toss from "../../pages/Toss";
 
 export default function AppRoutes() {
   const { isAuthenticated } = useAuth();
@@ -17,7 +18,12 @@ export default function AppRoutes() {
     <>
       <Routes>
         <Route path="/" element={<Home />} />
+
         <Route path="/matches" element={<Matches />} />
+
+        <Route path="/toss" element={<Toss/>}/>
+
+
         <Route
           path="/signup"
           element={!isAuthenticated ? <Signup /> : <Navigate to="/matches" />}

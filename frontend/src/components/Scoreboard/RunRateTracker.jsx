@@ -15,7 +15,7 @@ export default function RunRateTracker({
       {isSecondInningComplete &&
         isFirtInningComplete &&
         score.battingFirstTeam.runs === score.battingSecondTeam.runs && (
-          <p className="result">Match draw</p>
+          <p className="result">Match tie</p>
         )}
 
       {isSecondInningComplete &&

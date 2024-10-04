@@ -28,6 +28,10 @@ export default function Navigation() {
               <NavLink to="/matches">All Matches</NavLink>
             </li>
 
+            <li>
+              <NavLink to="/toss">Toss</NavLink>
+            </li>
+
             {!isAuthenticated && (
               <li>
                 <NavLink to="/login">Login</NavLink>

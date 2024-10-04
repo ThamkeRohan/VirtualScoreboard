@@ -17,7 +17,8 @@
   --danger: #eb2632;
   --success: #42b883;
   --light-blue: #a0eecc80;
-  --dark-blue: #128494;
+  --dark-blue: #127481;
+  --transparent-blue: #e7eaf67e;
   --light-green: #a3de83ac;
   --dark-green: #008342;
   --light-orange: #ffa3238e;
@@ -30,7 +31,7 @@
 }
 
 body {
-  font-family: 'Poppins', sans-serif;
+  font-family: 'Rubik', sans-serif;
   font-size: 16px;
   line-height: 1.5;
   background-color: var(--off-white);
@@ -56,7 +57,6 @@ img {
   position: relative;
   background-color: var(--dark-gray);
   color: var(--light-crimson);
-  /* box-shadow: 0 0 8px var(--dark-gray); */
   padding: 10px 0;
 }
 .app-header .app-title a{
@@ -163,34 +163,36 @@ img {
   background-color: var(--crimson);
 }
 
-
 /* Filter */ 
 .filter {
   background-color: var(--pure-white);
+  box-shadow: 0 0 10px var(--transparent-gray);
   padding: 1rem 0;
-  margin: 50px 0 30px 0;
-  border-radius: 4px;
+  border-radius: 8px;
+  margin: 20px auto;
+  max-width: 900px;
+}
+.filter .inputs {
+  margin: 0 auto;
+  max-width: 450px;
 }
 .filter label {
-  display: inline-block;
+  display: block;
   color: var(--gray);
   width: 12rem;
-  
 }
 .filter input, .filter select {
   margin: 0.5rem 0;
-  padding: 0.2rem 0.4rem;
+  padding: 0.3rem 0.5rem;
   border-radius: 6px;
-  border: 1px solid var(--gray);
-  min-width: 12rem;
+  border: 1px solid var(--light-gray);
+  width: 100%;
+  background-color: var(--transparent-blue);
 }
-
 
 /* Match Card */
 .match-card {
-  max-width: 800px;
-  margin: 20px auto;
-  box-shadow: 10px 10px 10px var(--light-gray);
+  box-shadow: 0 0 10px var(--light-gray);
 }
 .match-card a {
   color: var(--dark-gray);
@@ -199,15 +201,19 @@ img {
   color: var(--gray);
 }
 .match-card .team {
-  border-bottom: 1px solid var(--light-gray);
-  padding: 0 0 0.5rem 0;
+  background-color: var(--transparent-blue);
+  height: 3rem;
   margin: 1rem 0;
+  padding: 1.5rem;
+  border-radius: 5px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  color: var(--dark-blue);
 }
 .match-card .team .team-name{
   text-transform: uppercase;
+  color: var(--dark-pink);
 }
 .match-card .team .team-score {
   display: flex;
@@ -217,6 +223,7 @@ img {
 .match-card .match-meta {
   display: flex;
   justify-content: space-between;
+  color: var(--gray);
 }
 .match-card .match-status {
   display: flex;
@@ -228,6 +235,14 @@ img {
 }
 .match-card .match-meta .completed {
   color: var(--success)
+}
+
+.match-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.3rem;
+  margin: 0 auto;
+  max-width: 900px;
 }
 
 /* Match Setup */
@@ -434,6 +449,83 @@ img {
   border: 1px solid var(--dark-pink);
 }
 
+/* Toss */
+.coin {
+  width: 200px;
+  height: 200px;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 3s ease-out;
+}
+
+.coin.spinning {
+  animation: spin-and-scale 3s ease-out infinite;
+}
+
+.coin.heads {
+  transform: rotateX(0deg);
+}
+
+.coin.tails {
+  transform: rotateX(180deg);
+}
+
+.coin .face {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 30px;
+  font-weight: bold;
+  backface-visibility: hidden;
+  border: 5px solid;
+}
+
+.coin .face.heads {
+  transform: rotateX(0deg);
+  background-color: var(--light-orange);
+  color: var(--dark-orange);
+}
+
+.coin .face.tails {
+  transform: rotateX(180deg);
+  background-color: var(--light-blue);
+  color: var(--dark-blue);
+}
+
+.toss-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: -1;
+}
+
+.toss-container button {
+  background-color: var(--pure-white);
+  color: var(--crimson);
+  margin-top: 50px;
+}
+
+@keyframes spin-and-scale {
+  0% {
+    transform: rotateX(0deg) scale(1);
+  }
+  50% {
+    transform: rotateX(1800deg) scale(1.3);
+  }
+  100% {
+    transform: rotateX(3600deg) scale(1);
+  }
+}
+
 
 /* Loading */ 
 .loading {
@@ -638,9 +730,10 @@ button:disabled {
     gap: 0.5rem;
     margin-top: 30px;
   }
-
-  .filter {
-    margin: 30px 0 10px;
+  
+  .match-list {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
   }
 
   .scoreboard .match-score {

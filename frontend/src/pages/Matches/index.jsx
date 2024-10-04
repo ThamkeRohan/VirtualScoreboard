@@ -65,7 +65,9 @@ export default function Matches() {
             <ErrorMessage error={error} />
           ) : matches.length > 0 ? (
             <>
-              <h1 className="page-heading text-xl-bold">{`${filter.category} matches ${
+              <h1 className="page-heading text-xl-bold">{`${
+                filter.category
+              } matches ${
                 filter.fromDate === filter.toDate
                   ? `on ${getMonthNameDayYearFormattedDate(filter.fromDate)}`
                   : `from ${getMonthNameDayYearFormattedDate(
@@ -73,9 +75,11 @@ export default function Matches() {
                     )} to ${getMonthNameDayYearFormattedDate(filter.toDate)}`
               }`}</h1>
 
-              {matches.map((match) => (
-                <MatchCard key={match._id} match={match} />
-              ))}
+              <section className="match-list">
+                {matches.map((match) => (
+                  <MatchCard key={match._id} match={match} />
+                ))}
+              </section>
             </>
           ) : (
             <NoMatchFound />
