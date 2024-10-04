@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useAuth, useAuthUpdate } from "../../contexts/AuthContext";
 import { NavLink } from "react-router-dom";
 
@@ -6,14 +6,27 @@ export default function Navigation() {
   const [showMenu, setShowMenu] = useState(false)
   const { isAuthenticated, umpire } = useAuth();
   const { logout } = useAuthUpdate();
+  const navRef = useRef()
 
-  function toggleShow() {
-    setShowMenu(prevShowMenu => !prevShowMenu)
-  }
+  useEffect(() => {
+    function handleClick(e) {
+      if(!navRef.current.contains(e.target)) {
+        setShowMenu(false)
+      }
+    }
+
+    if(showMenu) {
+      document.addEventListener("mousedown", handleClick)
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClick)
+    }
+  }, [showMenu])
 
   return (
-    <>
-      <button onClick={toggleShow} className="btn menu-btn">
+    <div ref={navRef}>
+      <button onClick={() => setShowMenu(prev => !prev)} className="btn menu-btn">
         {showMenu ? (
           <span className="material-symbols-outlined">close</span>
         ) : (
@@ -72,6 +85,6 @@ export default function Navigation() {
           </ul>
         </nav>
       )}
-    </>
+    </div>
   );
 }
