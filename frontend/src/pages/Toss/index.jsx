@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 
 export default function Toss() {
-    const [result, setResult] = useState("head")
+    const [result, setResult] = useState("heads")
     const [isSpinning, setIsSpinning] = useState(false)
 
     function tossCoin() {
