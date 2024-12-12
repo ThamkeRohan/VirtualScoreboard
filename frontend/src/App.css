@@ -152,13 +152,13 @@ img {
   gap: 1rem;
   margin-top: 3rem;
 }
-.hero .navigation-btns a {
+.hero .navigation-btns .link {
   color: var(--crimson);
   border: 1px solid var(--crimson);
   background-color: var(--pure-white);
   min-width: 195px;
 }
-.hero .navigation-btns a:first-child {
+.hero .navigation-btns .link:nth-child(2n - 1) {
   color: var(--pure-white);
   background-color: var(--crimson);
 }

@@ -1,9 +1,27 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import { useAuth } from "../../contexts/AuthContext";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth, useAuthUpdate } from "../../contexts/AuthContext";
+import { login } from "../../services/auth";
+import { useAsyncFn } from "../../hooks/useAsync";
+import Loading from "../../components/Loading";
 
 export default function Home() {
   const { isAuthenticated } = useAuth();
+  const loginFn = useAsyncFn(login)
+  const {login: loginLocally} = useAuthUpdate()
+  const navigate = useNavigate()
+
+  function loginASGuest() {
+    loginFn
+      .execute({
+        umpireName: "Guest",
+        password: "Guest@123",
+      })
+      .then((data) => {
+        loginLocally(data.umpire, data.token);
+        navigate("/matches")
+      });
+  }
   return (
     <div className="home">
       <section className="hero">
@@ -20,13 +38,18 @@ export default function Home() {
             </p>
           </div>
           <div className="navigation-btns">
-            <Link to="/matches" className="btn text-md-bold">
+            <Link to="/matches" className="btn text-md-bold link">
               Search matches
             </Link>
             {!isAuthenticated && (
-              <Link to="/signup" className="btn text-md-bold">
+              <Link to="/signup" className="btn text-md-bold link">
                 Create an account
               </Link>
+            )}
+            {!isAuthenticated && (
+              <button className="btn text-md-bold link" onClick={loginASGuest}>
+                {loginFn.loading ? <Loading isBtnLoading/> : "Continue as guest"}
+              </button>
             )}
           </div>
         </div>
