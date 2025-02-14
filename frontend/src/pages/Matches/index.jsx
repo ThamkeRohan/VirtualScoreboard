@@ -16,12 +16,13 @@ export default function Matches() {
   // Default date values
   const today = new Date();
   
-  const oneWeekAgo = new Date();
-  oneWeekAgo.setDate(today.getDate() - 7);
+  const sixMonthAgo = new Date();
+  sixMonthAgo.setMonth(today.getMonth() - 6);
+  // sixMonthAgo.setDate(today.getDate() - 6 * 30);
 
   const [filter, setFilter] = useState({
     category: "all",
-    fromDate: getYearMonthDayFormattedDate(oneWeekAgo),
+    fromDate: getYearMonthDayFormattedDate(sixMonthAgo),
     toDate: getYearMonthDayFormattedDate(today),
   });
 
